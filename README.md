@@ -12,3 +12,5 @@ The original dataset can be downloaded from Kaggle:
 
 - **Student Stress Factors: A Comprehensive Analysis**  
   https://www.kaggle.com/datasets/rxnach/student-stress-factors-a-comprehensive-analysis
+- **Mental Health Dataset**
+https://www.kaggle.com/datasets/bhavikjikadara/mental-health-dataset
