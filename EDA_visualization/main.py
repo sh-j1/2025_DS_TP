@@ -1,3 +1,26 @@
+"""
+Main script for Stress Level Dataset EDA, preprocessing, modeling, and visualization.
+This script performs the following steps:
+1. Data inspection, cleaning, and preprocessing using custom functions.
+2. Exploratory Data Analysis (EDA) and visualization of relevant statistics.
+3. Splits the dataset into training and test sets, and further divides the training set using Stratified K-Fold cross-validation.
+4. Trains classification models (Logistic Regression and Decision Tree) with varying hyperparameters for each fold, saves models, and evaluates performance.
+5. Saves predictions and compares train/test scores across folds, visualizing the results.
+6. Performs KMeans clustering and visualizes cluster assignments using PCA.
+7. Generates and saves confusion matrices and decision tree structure visualizations.
+Dependencies:
+- pandas, numpy, os
+- matplotlib, seaborn
+- scikit-learn
+- Custom modules: preprocessing, visualization, modeling_py
+Assumptions/Notes:
+- Input data files (e.g., "StressLevelDataset(original).csv") must exist in the working directory.
+- Output directories (e.g., "artifacts/plots", "artifacts/csv_data") will be created if they do not exist.
+- Custom modules must be available in the specified paths.
+- The script expects specific column names (e.g., 'stress_level') in the dataset.
+- Some visualization functions are commented out for future extension.
+"""
+
 import pandas as pd
 import os
 import matplotlib.pyplot as plt

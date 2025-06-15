@@ -1,4 +1,23 @@
 import pandas as pd
+"""
+This script merges two preprocessed datasets related to mental health and student stress into a single CSV file.
+Dependencies:
+    - pandas
+Preprocessing Steps:
+    1. Loads the preprocessed Mental Health Dataset from a specified CSV file.
+    2. Loads the Student Stress Dataset from another CSV file and standardizes its column names by:
+        - Stripping whitespace
+        - Converting to lowercase
+        - Replacing spaces with underscores
+    3. Prints the shapes of both datasets for verification.
+    4. Checks if both datasets have the same number of rows; raises an error if not.
+    5. Merges the datasets horizontally (column-wise) based on their index.
+    6. Saves the merged dataset to 'merged_dataset.csv'.
+Notes/Assumptions:
+    - The script assumes both datasets are preprocessed and aligned such that their rows correspond to the same entities.
+    - File paths are hardcoded and should be updated as needed.
+    - The merged dataset will only be created if the row counts match exactly.
+"""
 
 # 1. 전처리된 Mental Health Dataset 로드
 mental_df = pd.read_csv("C:/Users/ATIV/Desktop/vscode/vscode/datascience/StressLevelDataset.csv")

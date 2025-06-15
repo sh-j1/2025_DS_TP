@@ -1,26 +1,46 @@
+"""
+This script merges two CSV datasets based on their common columns using pandas.
+Preprocessing Steps:
+- Loads two datasets: a mental health dataset and a stress level dataset, from specified file paths.
+- Standardizes the column names of the stress level dataset by stripping whitespace, converting to lowercase, and replacing spaces with underscores to facilitate matching.
+- Identifies common columns between the two datasets.
+- If common columns exist, merges the datasets using the first common column as the key with an inner join.
+- Saves the merged DataFrame to 'merged_by_common_column.csv'.
+Dependencies:
+- pandas
+Notes/Assumptions:
+- The script assumes that both input CSV files exist at the specified paths.
+- Only the first common column found is used as the merge key.
+- The merge is performed as an inner join, so only rows with matching values in the merge key will be included in the output.
+- The script prints informative messages about the merge process and the result.
+"""
 import pandas as pd
 
-# 파일 경로
+# File paths for the datasets
 mental_path = "C:/Users/ATIV/Desktop/vscode/vscode/mental_health_final_encoded.csv"
 stress_path = "C:/Users/ATIV/Desktop/vscode/vscode/datascience/StressLevelDataset.csv"
 
-# 1. 데이터 로드
+# 1. Load the datasets into DataFrames
 mental_df = pd.read_csv(mental_path)
 stress_df = pd.read_csv(stress_path)
+
+# Standardize column names in stress_df: strip whitespace, lowercase, and replace spaces with underscores
 stress_df.columns = stress_df.columns.str.strip().str.lower().str.replace(" ", "_")
 
-# 2. 공통 컬럼 확인
+# 2. Find common columns between the two DataFrames
 common_cols = set(mental_df.columns).intersection(set(stress_df.columns))
-print("🔍 공통 컬럼:", common_cols)
+print("🔍 Common columns:", common_cols)
 
-# 3. 병합 시도
+# 3. Attempt to merge if there are common columns
 if common_cols:
-    # 예시: 가장 먼저 나오는 컬럼으로 병합
+    # Use the first common column as the merge key
     merge_key = list(common_cols)[0]
-    print(f"📎 공통 키 '{merge_key}' 기준 병합 시도 중...")
+    print(f"📎 Attempting to merge on common key '{merge_key}'...")
 
+    # Merge the DataFrames on the selected key using an inner join
     merged_df = pd.merge(mental_df, stress_df, on=merge_key, how='inner')
+    # Save the merged DataFrame to a CSV file
     merged_df.to_csv("merged_by_common_column.csv", index=False)
-    print("✅ 공통 컬럼 기준 병합 완료: merged_by_common_column.csv 저장됨")
+    print("✅ Merge complete: merged_by_common_column.csv saved")
 else:
-    print("❌ 공통 컬럼이 없어 병합할 수 없습니다.")
+    print("❌ No common columns found. Cannot merge.")

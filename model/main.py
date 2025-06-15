@@ -1,3 +1,32 @@
+"""
+Main script for training, evaluating, and visualizing machine learning models on stress level data.
+This script performs the following steps:
+1. Loads a dataset from 'data/merged_by_index_sample.csv'.
+2. Removes rows with missing values in the 'stress_level' column.
+3. Splits the data into features (X) and target (y).
+4. Performs stratified K-Fold cross-validation (default: 5 folds) to ensure balanced class distribution in each fold.
+5. For each fold:
+    - Trains multiple classification models using the training data.
+    - Saves each trained model to disk.
+6. Generates and saves predictions for all folds using the trained models.
+7. Performs KMeans clustering on the dataset and saves clustering results.
+8. Generates and saves confusion matrix plots for model evaluation.
+9. Visualizes the structure of the decision tree model for the first fold.
+10. Visualizes KMeans clustering results using 2D PCA projection.
+Dependencies:
+- pandas
+- modeling.utils_split
+- modeling.train_classifier
+- modeling.predict_and_save
+- modeling.train_cluster
+- modeling.model_eval_plot
+Assumptions/Notes:
+- The input CSV file must contain a 'stress_level' column.
+- All intermediate and output files are saved under the 'artifacts' directory.
+- The script expects specific directory structures for models, predictions, clusters, and plots.
+- Custom utility modules (under 'modeling') must be implemented and available in the Python path.
+"""
+
 import pandas as pd
 from modeling.utils_split import get_stratified_kfold_splits
 from modeling.train_classifier import train_models, save_model
